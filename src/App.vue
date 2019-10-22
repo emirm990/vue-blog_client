@@ -7,8 +7,9 @@
     <router-view />
   </div>
 </template>
-
 <style lang="scss">
+@import "~vue-wysiwyg/dist/vueWysiwyg.css";
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

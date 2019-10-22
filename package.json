@@ -10,9 +10,11 @@
   "dependencies": {
     "core-js": "^3.1.2",
     "vue": "^2.6.10",
-    "vue-router": "^3.0.6"
+    "vue-router": "^3.0.6",
+    "vue-wysiwyg": "^1.7.2"
   },
   "devDependencies": {
+    "@babel/runtime-corejs2": "^7.6.3",
     "@vue/cli-plugin-babel": "^4.0.0",
     "@vue/cli-plugin-eslint": "^4.0.0",
     "@vue/cli-service": "^4.0.0",

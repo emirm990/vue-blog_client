@@ -1,9 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import CKEditor from "@ckeditor/ckeditor5-vue";
 
-Vue.use(CKEditor);
 Vue.use(VueRouter);
 
 const routes = [
