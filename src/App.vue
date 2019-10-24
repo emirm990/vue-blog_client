@@ -2,13 +2,13 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link>
-      <router-link to="/about"></router-link>
+      <router-link to="/login"></router-link>
     </div>
     <router-view />
   </div>
 </template>
 <style lang="scss">
-@import "~vue-wysiwyg/dist/vueWysiwyg.css";
+@import "~vue-wysiwyg/dist/vueWysiwyg";
 
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;

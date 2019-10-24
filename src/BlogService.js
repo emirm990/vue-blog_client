@@ -44,5 +44,13 @@ class BlogService {
 			}
 		});
 	}
+
+	static updateBlog(id, title, text) {
+		return axios.post(url, {
+			id,
+			title,
+			text
+		});
+	}
 }
 export default BlogService;

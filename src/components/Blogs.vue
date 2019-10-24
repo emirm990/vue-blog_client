@@ -8,7 +8,7 @@
         >{{`${blog.createdAt.getDate()}/${blog.createdAt.getMonth()}/${blog.createdAt.getFullYear()}`}}</p>
       </div>
       <div class="blog-body">
-        <div class="blog-text" v-html="blog.text">{{blog.text}}</div>
+        <div class="blog-text editr--content" v-html="blog.text">{{blog.text}}</div>
       </div>
       <details v-if="blog.comments.length > 0">
         <summary>Number of comments: {{blog.comments.length}}</summary>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import BlogService from "../BlogService";
+import BlogServiceFrontPage from "../BlogServiceFrontPage";
 export default {
   name: "Blogs",
   data() {
@@ -35,7 +35,7 @@ export default {
   },
   async created() {
     try {
-      this.blogs = await BlogService.getBlogs();
+      this.blogs = await BlogServiceFrontPage.getBlogs();
     } catch (err) {
       this.error = err.message;
     }
