@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:5000/api/blogs';
+const url = 'api/blogs';
 
 class BlogService {
 	// Get blogs
