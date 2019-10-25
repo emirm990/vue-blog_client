@@ -50,7 +50,8 @@ export default {
   margin: 0 auto;
 }
 .blog {
-  min-height: 100vh;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 .blog-date {
   margin-top: 0;

@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <Login v-if="!logged" v-on:logged-in="logged=true" v-on:error="handleError" />
+    <router-link to="/">Home</router-link>
+    <Login v-if="!logged" v-on:logged-in="logged=true" />
     <Editor v-else />
-    <p v-if="error!=''">{{error}}</p>
   </div>
 </template>
 <script>
@@ -16,17 +16,8 @@ export default {
   },
   data() {
     return {
-      logged: false,
-      error: ""
+      logged: false
     };
-  },
-  methods: {
-    handleError() {
-      this.error = "Wrong username or password";
-      setTimeout(() => {
-        this.error = "";
-      }, 2500);
-    }
   }
 };
 </script>
