@@ -24,6 +24,7 @@
   </div>
 </template>
 <script>
+import BlogService from "../BlogService";
 export default {
   name: "Login",
 
@@ -33,11 +34,12 @@ export default {
       password: "",
       logged: false,
       error: "",
-      show: false
+      show: false,
+      status: ""
     };
   },
   methods: {
-    login(username, password) {
+    /*login(username, password) {
       if (username != "test" || password != "test") {
         this.logged = false;
         this.error = "Wrong username or password";
@@ -45,6 +47,18 @@ export default {
         this.logged = true;
         this.error = "";
         this.$emit("logged-in");
+      }
+    },*/
+    async login(username, password) {
+      try {
+        const response = await BlogService.login(username, password);
+        this.status = response.data;
+        if (this.status == "logged") {
+          this.logged = true;
+          this.$emit("logged-in");
+        }
+      } catch (err) {
+        this.error = err.message;
       }
     },
     showPassword() {

@@ -1,9 +1,15 @@
 import axios from 'axios';
 
 const url = 'api/blogs';
-
+const loginUrl = 'api/blogs/login';
 class BlogService {
 	// Get blogs
+	static login(username, password) {
+		return axios.post(loginUrl, {
+			username,
+			password
+		});
+	}
 	static getBlogs() {
 		return new Promise(async (resolve, reject) => {
 			try {
