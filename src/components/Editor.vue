@@ -133,6 +133,11 @@ export default {
 };
 </script>
 <style lang="scss">
+.editr--content {
+  background: white;
+}
+</style>
+<style lang="scss" scoped>
 .about {
   text-align: left;
 }
@@ -142,9 +147,7 @@ export default {
     box-shadow: 0 0 5px black;
   }
 }
-.editr--content {
-  background: white;
-}
+
 .focused {
   border-radius: 5px;
   box-shadow: 0 0 5px black;
