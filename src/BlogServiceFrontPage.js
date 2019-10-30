@@ -21,5 +21,15 @@ class BlogServiceFrontPage {
 			}
 		});
 	}
+
+	static comment(id, name, text) {
+		return axios.get(url, {
+			params: {
+				id,
+				name,
+				text
+			}
+		});
+	}
 }
 export default BlogServiceFrontPage;
