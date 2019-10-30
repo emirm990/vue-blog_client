@@ -8,24 +8,12 @@
     </div>
     <div class="blog-container">
       <transition-group name="list-complete">
-        <div class="blog list-complete-item" v-for="blog in filteredList" v-bind:key="blog._id">
-          <div class="blog-header">
-            <h2 class="blog-title">{{blog.title}}</h2>
-            <p
-              class="blog-date"
-            >{{`${blog.createdAt.getDate()}/${blog.createdAt.getMonth()}/${blog.createdAt.getFullYear()}`}}</p>
-          </div>
-          <div class="blog-body">
-            <div class="blog-text editr--content" v-html="blog.text">{{blog.text}}</div>
-          </div>
-          <details v-if="blog.comments.length > 0">
-            <summary>Number of comments: {{blog.comments.length}}</summary>
-            <div class="blog-comment" v-for="comment in blog.comments" v-bind:key="comment.index">
-              <p class="blog-comment-name">{{comment.name}}</p>
-              <p class="blog-comment-comment">{{comment.comment}}</p>
-              <!--<p class="blog-comment-date">{{comment.date}}</p>-->
-            </div>
-          </details>
+        <div
+          v-for="(blog,index) in filteredList"
+          v-bind:key="blog._id"
+          class="blog list-complete-item"
+        >
+          <Blog @commentpassed="comment" :blog="blog" :status="status" :index="index" />
         </div>
       </transition-group>
     </div>
@@ -34,14 +22,21 @@
 
 <script>
 import BlogServiceFrontPage from "../BlogServiceFrontPage";
+import Blog from "./Blog";
 export default {
   name: "Blogs",
+  components: {
+    Blog
+  },
   data() {
     return {
       blogs: [],
       error: "",
       text: "",
-      searchValue: ""
+      searchValue: "",
+      open: false,
+      status: "",
+      blog: {}
     };
   },
   computed: {
@@ -53,9 +48,31 @@ export default {
       });
     }
   },
+  methods: {
+    async comment(id, name, text) {
+      /* eslint-disable no-console */
+      //console.log(id, name, text);
+      if (name != "" && text != "") {
+        try {
+          this.blog = await BlogServiceFrontPage.comment(id, name, text);
+          this.blogs = await BlogServiceFrontPage.getBlogs();
+        } catch (err) {
+          this.error = err.message;
+        }
+      } else {
+        this.status = "Name or comment can't be empty!";
+        setTimeout(() => {
+          this.status = "";
+        }, 1500);
+      }
+    }
+  },
   async created() {
     try {
       this.blogs = await BlogServiceFrontPage.getBlogs();
+      for (let i = 0; i < this.blogs.length; i++) {
+        this.open[i] = false;
+      }
     } catch (err) {
       this.error = err.message;
     }
@@ -115,30 +132,5 @@ export default {
 .blog-container {
   max-width: 1080px;
   margin: 0 auto;
-}
-.blog {
-  padding: 20px;
-  margin-bottom: 20px;
-}
-.blog-date {
-  margin-top: 0;
-}
-.blog-title {
-  margin-bottom: 0;
-}
-.blog-body {
-  padding-left: 25px;
-  padding-right: 25px;
-}
-.blog-text {
-  text-align: left;
-}
-.blog-comment {
-  margin-left: 10%;
-  display: flex;
-}
-.blog-comment-name {
-  margin-right: 20px;
-  font-weight: bold;
 }
 </style>
