@@ -69,11 +69,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 input {
-  background-color: #d0d8d9 !important;
   border: 1px solid #9ca5a6;
   padding: 10px;
   transition: box-shadow 0.2s ease-in-out;
   margin-right: 5px;
+  background: white;
 }
 .container form {
   display: flex;
@@ -142,6 +142,18 @@ input {
         font-size: 150%;
         text-shadow: 10px 10px 5px black;
       }
+    }
+  }
+}
+@media only screen and (max-width: 768px) {
+  .container form {
+    flex-direction: column;
+    input {
+      margin-right: 0;
+      width: 100%;
+    }
+    .form-group {
+      width: 250px;
     }
   }
 }

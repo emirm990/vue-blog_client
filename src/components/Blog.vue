@@ -9,10 +9,9 @@
     <div class="blog-body">
       <div class="blog-text editr--content" v-html="blog.text">{{blog.text}}</div>
     </div>
-    <button class="open-comments-button" @click="handleOpen">Comments</button>
+    <button class="open-comments-button" @click="handleOpen">Comments {{blog.comments.length}}</button>
     <div class="blog-comments" v-bind:class="{opened: open}">
       <div v-if="blog.comments.length > 0">
-        <p>Comments: {{blog.comments.length}}</p>
         <div class="blog-comment" v-for="(comment, index) in blog.comments" v-bind:key="index">
           <div class="blog-comment-info-container">
             <p class="blog-comment-name">{{comment.name}}</p>
@@ -153,6 +152,27 @@ export default {
     &:hover {
       border-radius: 4px;
       border-color: #9ca5a6;
+    }
+  }
+}
+@media only screen and (max-width: 768px) {
+  .blog-title {
+    padding-top: 10px;
+  }
+  .comment-input-container {
+    flex-wrap: wrap;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .comment-input-container {
+    justify-content: flex-end;
+    input {
+      margin: 2px 0;
+      flex-basis: 100%;
+    }
+    button {
+      margin: 2px 0;
+      flex-basis: 50%;
     }
   }
 }

@@ -133,4 +133,9 @@ export default {
   max-width: 1080px;
   margin: 0 auto;
 }
+@media only screen and (max-width: 768px) {
+  .blog-container {
+    margin: 0 10px 10px 10px;
+  }
+}
 </style>

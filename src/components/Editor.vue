@@ -136,6 +136,17 @@ export default {
 .editr--content {
   background: white;
 }
+@media only screen and (max-width: 425px) {
+  .editr--toolbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    height: auto;
+  }
+  .list-complete-item {
+    display: block;
+    margin-right: 0;
+  }
+}
 </style>
 <style lang="scss" scoped>
 .about {
@@ -207,5 +218,19 @@ export default {
 }
 .list-complete-leave-active {
   position: absolute;
+}
+@media only screen and (max-width: 425px) {
+  .list-complete-item {
+    display: block;
+  }
+  .about {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .blog {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
 }
 </style>

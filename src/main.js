@@ -10,7 +10,9 @@ library.add(faEyeSlash);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;
 import wysiwyg from 'vue-wysiwyg';
-Vue.use(wysiwyg, {}); // config is optional. more below
+Vue.use(wysiwyg, {
+	hideModules: { separator: true }
+}); // config is optional. more below
 new Vue({
 	router,
 	render: (h) => h(App)
