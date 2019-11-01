@@ -1,77 +1,48 @@
 <template>
   <div>
-    <div class="blog-header">
-      <router-link v-bind:to="'/blog/'+ blog._id">
+    <router-link to="/">Home</router-link>
+    <div class="blog">
+      <div class="blog-header">
         <h2 class="blog-title">{{blog.title}}</h2>
-      </router-link>
-      <p
-        class="blog-date"
-      >{{`${blog.createdAt.getDate()}/${blog.createdAt.getMonth()}/${blog.createdAt.getFullYear()}`}}</p>
-    </div>
-    <div class="blog-body">
-      <div class="blog-text editr--content" v-html="blog.text">{{blog.text}}</div>
-    </div>
-    <button class="open-comments-button" @click="handleOpen">Comments {{blog.comments.length}}</button>
-    <div class="blog-comments" v-bind:class="{opened: open}">
-      <div v-if="blog.comments.length > 0">
-        <div class="blog-comment" v-for="(comment, index) in blog.comments" v-bind:key="index">
-          <div class="blog-comment-info-container">
-            <p class="blog-comment-name">{{comment.name}}</p>
-            <p class="blog-comment-comment">{{comment.comment}}</p>
-          </div>
-          <div class="blog-comment-date-container">
-            <p
-              class="blog-comment-date"
-            >{{`${new Date(comment.date).getDate()}/${new Date(comment.date).getMonth()}/${new Date(comment.date).getFullYear()} - ${new Date(comment.date).getHours()}:${new Date(comment.date).getMinutes()}`}}</p>
-          </div>
-        </div>
+        <p
+          v-if="loaded"
+          class="blog-date"
+        >{{`${new Date(blog.createdAt).getDate()}/${new Date(blog.createdAt).getMonth()}/${new Date(blog.createdAt).getFullYear()} - ${new Date(blog.createdAt).getHours()}:${new Date(blog.createdAt).getMinutes()}`}}</p>
       </div>
-      <div class="comment-input-container">
-        <p v-if="status">{{status}}</p>
-        <input type="text" v-model="commentName" placeholder="Name" />
-        <input type="text" v-model="commentText" placeholder="comment" />
-        <button @click="commentEmit(blog._id,commentName, commentText)">Comment</button>
+      <div class="blog-body">
+        <div class="blog-text editr--content" v-html="blog.text">{{blog.text}}</div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import BlogServiceFrontPage from "../BlogServiceFrontPage";
 export default {
-  name: "Blog",
-  props: {
-    blog: {},
-    index: Number,
-    status: String
-  },
+  name: "BlogView",
   data() {
     return {
-      open: false,
-      commentText: "",
-      commentName: ""
+      blog: {},
+      loaded: false
     };
   },
-  methods: {
-    handleOpen() {
-      this.open = !this.open;
-    },
-    commentEmit(id, name, text) {
-      this.$emit("commentpassed", id, name, text);
-      this.commentText = "";
-      this.commentName = "";
+  async created() {
+    try {
+      this.response = await BlogServiceFrontPage.getBlog(this.$route.params.id);
+      this.blog = this.response.data.value;
+      this.loaded = true;
+    } catch (err) {
+      this.error = err.message;
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-a {
-  text-decoration: none;
-  color: #1a1a26;
-}
 .blog {
-  padding: 20px;
+  margin: 0 auto;
+  max-width: 1440px;
   margin-bottom: 20px;
+  background: #d0d8d9;
 }
-
 .blog-date {
   margin-top: 0;
 }
@@ -84,8 +55,6 @@ a {
 }
 .blog-text {
   text-align: left;
-  max-height: 500px;
-  overflow: hidden;
 }
 .blog-comments {
   max-height: 0;

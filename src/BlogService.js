@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const url = 'api/blogs';
 const loginUrl = 'api/blogs/login';
+
 class BlogService {
 	// Get blogs
 	static login(username, password) {
