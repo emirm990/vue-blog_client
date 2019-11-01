@@ -16,19 +16,20 @@
   </div>
 </template>
 <script>
-import BlogServiceFrontPage from "../BlogServiceFrontPage";
+import SingleBlog from "../SingleBlog";
 export default {
   name: "BlogView",
   data() {
     return {
       blog: {},
-      loaded: false
+      loaded: false,
+      error: ""
     };
   },
   async created() {
     try {
-      this.response = await BlogServiceFrontPage.getBlog(this.$route.params.id);
-      this.blog = this.response.data.value;
+      let response = await SingleBlog.getBlog(this.$route.params.id);
+      this.blog = response.data;
       this.loaded = true;
     } catch (err) {
       this.error = err.message;
