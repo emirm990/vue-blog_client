@@ -28,7 +28,7 @@ export default {
   },
   async created() {
     try {
-      let response = await SingleBlog.getBlog(this.$route.params.id);
+      let response = await SingleBlog.getBlog(this.$route.query.id);
       this.blog = response.data;
       this.loaded = true;
     } catch (err) {

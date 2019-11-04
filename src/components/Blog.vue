@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="blog-header">
-      <router-link v-bind:to="'/blog/'+ blog._id">
+      <router-link :to="{path:'/blog/', query:{id: blog._id}}">
         <h2 class="blog-title">{{blog.title}}</h2>
       </router-link>
       <p
@@ -77,6 +77,7 @@ a {
 }
 .blog-title {
   margin-bottom: 0;
+  padding-top: 10px;
 }
 .blog-body {
   padding-left: 25px;
@@ -95,6 +96,7 @@ a {
 }
 .open-comments-button {
   margin-bottom: 10px;
+  margin-top: 10px;
   border: 1px solid white;
   padding: 10px 20px;
   background: white;
@@ -106,7 +108,7 @@ a {
   }
 }
 .opened {
-  max-height: 1000px;
+  max-height: 10000px;
   transition: max-height 0.2s ease-in-out;
 }
 .blog-comment-info-container {
